@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Virtual environment — never commit this
+venv/
+env/
+.env
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp/test scripts
+fix_routes.py
+test_stock.py
+test_llm.py
+
+# yfinance cache
+.cache/
