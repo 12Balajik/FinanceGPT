@@ -25,3 +25,5 @@ test_llm.py
 
 # yfinance cache
 .cache/
+# Database
+*.db
