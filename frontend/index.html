@@ -21,7 +21,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -38,333 +37,350 @@
 
   /* ---------- Ticker tape ---------- */
   .ticker-wrap {
-    position: sticky;
-    top: 0;
-    z-index: 50;
+    position: sticky; top: 0; z-index: 50;
     background: var(--ink);
     border-bottom: 1px solid #23262e;
-    overflow: hidden;
-    white-space: nowrap;
-    padding: 11px 0;
+    overflow: hidden; white-space: nowrap; padding: 11px 0;
   }
-
-  .ticker-track {
-    display: inline-flex;
-    animation: scroll-left 38s linear infinite;
-  }
-
+  .ticker-track { display: inline-flex; animation: scroll-left 38s linear infinite; }
   .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
-
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
+  @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .ticker-item {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 8px;
-    padding: 0 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: #C9CBD3;
-    border-right: 1px solid #2A2D36;
+    display: inline-flex; align-items: baseline; gap: 8px;
+    padding: 0 24px; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: #C9CBD3; border-right: 1px solid #2A2D36;
   }
-
   .ticker-item .sym { color: #fff; font-weight: 600; letter-spacing: 0.02em; }
   .ticker-item .chg.up { color: #4ADE80; }
   .ticker-item .chg.down { color: #F87171; }
   .ticker-item .chg.flat { color: #8A8D96; }
 
-  /* ---------- Header / hero ---------- */
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .hero {
-    padding: 88px 24px 48px;
-    text-align: center;
-  }
+  /* ---------- Hero ---------- */
+  .hero { padding: 88px 24px 48px; text-align: center; }
 
   .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent-deep);
-    background: rgba(61, 90, 254, 0.08);
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 100px;
-    margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent-deep); background: rgba(61,90,254,0.08);
+    display: inline-block; padding: 6px 12px; border-radius: 100px; margin-bottom: 24px;
   }
 
   h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(34px, 5.5vw, 52px);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 16px;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(34px, 5.5vw, 52px); line-height: 1.08;
+    letter-spacing: -0.01em; color: var(--ink); margin-bottom: 16px;
   }
-
-  h1 em {
-    font-style: italic;
-    color: var(--accent-deep);
-  }
+  h1 em { font-style: italic; color: var(--accent-deep); }
 
   .sub {
-    font-size: 17px;
-    color: var(--muted);
-    line-height: 1.5;
-    max-width: 480px;
-    margin: 0 auto 40px;
+    font-size: 17px; color: var(--muted); line-height: 1.5;
+    max-width: 480px; margin: 0 auto 40px;
   }
+
+  /* ---------- Mode tabs ---------- */
+  .mode-tabs { display: flex; gap: 4px; justify-content: center; margin-bottom: 24px; }
+  .mode-tab {
+    font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600;
+    padding: 8px 20px; border-radius: 100px; border: 1.5px solid var(--line);
+    background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s ease;
+  }
+  .mode-tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .mode-tab:hover:not(.active) { border-color: var(--accent); color: var(--accent-deep); }
 
   /* ---------- Search ---------- */
   .search-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--card);
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 6px 6px 6px 20px;
-    max-width: 520px;
-    margin: 0 auto;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card); border: 1.5px solid var(--line);
+    border-radius: 14px; padding: 6px 6px 6px 20px;
+    max-width: 520px; margin: 0 auto;
     box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 12px 32px -16px rgba(15,17,21,0.10);
     transition: border-color 0.18s ease, box-shadow 0.18s ease;
   }
-
   .search-box:focus-within {
     border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(61,90,254,0.12), 0 12px 32px -16px rgba(15,17,21,0.14);
   }
-
   .search-box input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    flex: 1; border: none; outline: none; background: transparent;
+    font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500;
+    color: var(--ink); letter-spacing: 0.01em; text-transform: uppercase;
   }
-
   .search-box input::placeholder {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    text-transform: none;
-    color: #B4B0A8;
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    text-transform: none; color: #B4B0A8;
   }
-
   .search-box button {
-    background: var(--ink);
-    color: #fff;
-    border: none;
-    border-radius: 9px;
-    padding: 13px 22px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14.5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
-    white-space: nowrap;
+    background: var(--ink); color: #fff; border: none; border-radius: 9px;
+    padding: 13px 22px; font-family: 'Inter', sans-serif; font-size: 14.5px;
+    font-weight: 600; cursor: pointer; transition: background 0.15s ease, transform 0.1s ease; white-space: nowrap;
   }
-
   .search-box button:hover { background: var(--accent-deep); }
   .search-box button:active { transform: scale(0.97); }
   .search-box button:disabled { background: #C4C2BC; cursor: not-allowed; }
 
-  .hint-row {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 16px;
-  }
-
+  .hint-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
   .hint-chip {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--line);
-    padding: 5px 12px;
-    border-radius: 100px;
-    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    color: var(--muted); background: transparent; border: 1px solid var(--line);
+    padding: 5px 12px; border-radius: 100px; cursor: pointer;
     transition: border-color 0.15s ease, color 0.15s ease;
   }
-
   .hint-chip:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ---------- Compare flow ---------- */
+  .compare-box {
+    display: none; flex-direction: column; align-items: center;
+    gap: 12px; max-width: 520px; margin: 0 auto; width: 100%;
+  }
+  .compare-box.active { display: flex; }
+
+  .compare-hint { font-size: 12.5px; color: var(--muted); text-align: center; }
+
+  .count-pills { display: flex; gap: 10px; justify-content: center; }
+  .count-pill {
+    width: 52px; height: 52px; border-radius: 14px; border: 1.5px solid var(--line);
+    background: var(--card); font-family: 'Fraunces', serif; font-size: 22px;
+    font-weight: 500; color: var(--ink); cursor: pointer; transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04);
+  }
+  .count-pill:hover {
+    border-color: var(--accent); color: var(--accent-deep);
+    transform: translateY(-2px); box-shadow: 0 6px 16px -6px rgba(61,90,254,0.25);
+  }
+  .count-pill:active { transform: scale(0.95); }
+
+  #tickerBoxes { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+  .ticker-row {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1.5px solid var(--line);
+    border-radius: 14px; padding: 8px 8px 8px 20px;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ticker-row:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(61,90,254,0.10); }
+  .ticker-row .row-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    font-weight: 600; color: var(--muted); letter-spacing: 0.06em; min-width: 20px;
+  }
+  .ticker-row input {
+    flex: 1; border: none; outline: none; background: transparent;
+    font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600;
+    color: var(--ink); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .ticker-row input::placeholder {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    text-transform: none; color: #B4B0A8; font-size: 14px; letter-spacing: 0;
+  }
+
+  #compareBtn {
+    width: 100%; background: var(--ink); color: #fff; border: none;
+    border-radius: 12px; padding: 15px 22px; font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  #compareBtn:hover { background: var(--accent-deep); }
+  #compareBtn:active { transform: scale(0.98); }
+  #compareBtn:disabled { background: #C4C2BC; cursor: not-allowed; }
+
+  /* ---------- Ask AI ---------- */
+  .ask-box {
+    display: none; flex-direction: column; gap: 12px;
+    max-width: 520px; margin: 0 auto; width: 100%;
+  }
+  .ask-box.active { display: flex; }
+  .ask-input-wrap {
+    background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 12px 32px -16px rgba(15,17,21,0.10);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ask-input-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(61,90,254,0.10); }
+  .ask-input-wrap textarea {
+    width: 100%; border: none; outline: none; background: transparent;
+    font-family: 'Inter', sans-serif; font-size: 15px; color: var(--ink);
+    padding: 18px 20px 10px; resize: none; line-height: 1.5;
+  }
+  .ask-input-wrap textarea::placeholder { color: #B4B0A8; }
+  .ask-footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px 12px 20px; }
+  .ask-counter { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  #askBtn {
+    background: var(--ink); color: #fff; border: none; border-radius: 9px;
+    padding: 10px 20px; font-family: 'Inter', sans-serif; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: background 0.15s ease, transform 0.1s ease;
+  }
+  #askBtn:hover { background: var(--accent-deep); }
+  #askBtn:active { transform: scale(0.97); }
+  #askBtn:disabled { background: #C4C2BC; cursor: not-allowed; }
+  .ask-suggestions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .ask-chip {
+    font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--muted);
+    background: transparent; border: 1px solid var(--line); padding: 6px 14px;
+    border-radius: 100px; cursor: pointer; transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .ask-chip:hover { border-color: var(--accent); color: var(--accent-deep); }
 
   /* ---------- Result area ---------- */
   .result-area {
-    margin: 0 auto;
-    padding: 0 24px 100px;
-    min-height: 80px;
-    width: 100%;
-    max-width: 720px;
-    transition: max-width 0.3s ease;
+    margin: 0 auto; padding: 0 24px 100px;
+    min-height: 80px; width: 100%; max-width: 720px; transition: max-width 0.3s ease;
   }
-
-  .state-msg {
-    text-align: center;
-    color: var(--muted);
-    font-size: 14.5px;
-    padding: 32px 0;
-  }
-
+  .state-msg { text-align: center; color: var(--muted); font-size: 14.5px; padding: 32px 0; }
   .state-msg.error { color: var(--loss); }
-
   .spinner {
-    width: 22px;
-    height: 22px;
-    border: 2.5px solid var(--line);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    margin: 0 auto 14px;
-    animation: spin 0.8s linear infinite;
+    width: 22px; height: 22px; border: 2.5px solid var(--line);
+    border-top-color: var(--accent); border-radius: 50%;
+    margin: 0 auto 14px; animation: spin 0.8s linear infinite;
   }
-
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* ---------- Result card ---------- */
   .result-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 36px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 36px;
     box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 24px 48px -24px rgba(15,17,21,0.12);
     animation: rise 0.45s cubic-bezier(0.16,1,0.3,1);
   }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
   .result-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 28px;
-    gap: 16px;
-    flex-wrap: wrap;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 20px; gap: 16px; flex-wrap: wrap;
   }
-
   .result-id .sym-big {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--accent-deep);
-    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--accent-deep); text-transform: uppercase;
   }
-
   .result-id .company {
-    font-family: 'Fraunces', serif;
-    font-size: 26px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-top: 2px;
+    font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500;
+    color: var(--ink); margin-top: 2px;
   }
-
   .price-block { text-align: right; }
-
   .price-block .price {
-    font-family: 'Fraunces', serif;
-    font-size: 38px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1;
+    font-family: 'Fraunces', serif; font-size: 38px; font-weight: 500; color: var(--ink); line-height: 1;
   }
-
-  .price-block .delta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    font-weight: 600;
-    margin-top: 6px;
-  }
-
+  .price-block .delta { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; margin-top: 6px; }
   .delta.up { color: var(--gain); }
   .delta.down { color: var(--loss); }
 
+  /* ---------- Signal ---------- */
+  .signal-row {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+    padding: 16px 20px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line);
+  }
+  .signal-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.1em; padding: 8px 18px; border-radius: 8px; text-transform: uppercase;
+  }
+  .signal-badge.BUY { background: rgba(22,163,74,0.12); color: #15803D; border: 1.5px solid rgba(22,163,74,0.3); }
+  .signal-badge.SELL { background: rgba(220,38,38,0.10); color: #B91C1C; border: 1.5px solid rgba(220,38,38,0.25); }
+  .signal-badge.HOLD { background: rgba(217,119,6,0.10); color: #B45309; border: 1.5px solid rgba(217,119,6,0.25); }
+  .signal-meta { display: flex; flex-direction: column; gap: 3px; }
+  .signal-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .signal-confidence { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: var(--ink); }
+  .signal-disclaimer { font-size: 11px; color: var(--muted); margin-left: auto; text-align: right; max-width: 200px; line-height: 1.4; }
+
+  /* ---------- Stat grid ---------- */
   .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 28px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    border-radius: 12px; overflow: hidden; margin-bottom: 24px;
   }
+  .stat { background: var(--card); padding: 16px 18px; }
+  .stat .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 6px; }
+  .stat .value { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: var(--ink); }
 
-  .stat {
-    background: var(--card);
-    padding: 16px 18px;
+  /* ---------- Chart ---------- */
+  .chart-section { margin-bottom: 24px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .chart-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 16px 12px; border-bottom: 1px solid var(--line);
   }
-
-  .stat .label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    margin-bottom: 6px;
+  .chart-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .period-tabs { display: flex; gap: 2px; }
+  .period-tab {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 600;
+    padding: 5px 10px; border-radius: 6px; border: none; background: transparent;
+    color: var(--muted); cursor: pointer; transition: all 0.12s ease;
   }
+  .period-tab:hover { background: var(--bg); color: var(--ink); }
+  .period-tab.active { background: var(--ink); color: #fff; }
+  .chart-wrap { padding: 16px; background: var(--card); transition: opacity 0.2s ease; }
+  .chart-wrap canvas { max-height: 200px; }
 
-  .stat .value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .analysis-block {
-    border-top: 1px solid var(--line);
-    padding-top: 24px;
-  }
-
+  /* ---------- Analysis block ---------- */
+  .analysis-block { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 8px; }
   .analysis-block .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent-deep);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--accent-deep); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
   }
-
   .analysis-block .label::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: inline-block;
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); display: inline-block;
   }
+  .analysis-block p { font-size: 16px; line-height: 1.65; color: #2A2D33; }
 
-  .analysis-block p {
-    font-size: 16px;
-    line-height: 1.65;
-    color: #2A2D33;
+  /* ---------- News ---------- */
+  .news-block { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 8px; }
+  .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .news-title-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--accent-deep); display: flex; align-items: center; gap: 8px;
   }
+  .news-title-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .news-loading { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  .news-sentiment { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; }
+  .news-summary { font-size: 14px; line-height: 1.6; color: #2A2D33; margin-bottom: 14px; }
+  .news-themes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .news-theme {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-deep);
+    background: rgba(61,90,254,0.07); border: 1px solid rgba(61,90,254,0.15);
+    padding: 4px 10px; border-radius: 100px;
+  }
+  .news-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .news-item {
+    display: flex; flex-direction: column; gap: 3px; padding: 12px 16px;
+    background: var(--card); text-decoration: none; transition: background 0.12s ease;
+    border-bottom: 1px solid var(--line);
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-item:hover { background: var(--bg); }
+  .news-item-title { font-size: 13.5px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .news-item-meta { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); }
 
-  footer {
-    text-align: center;
-    padding: 32px 24px 60px;
-    color: var(--muted);
-    font-size: 12.5px;
-    font-family: 'JetBrains Mono', monospace;
+  /* ---------- Compare result ---------- */
+  .compare-result-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 36px;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 24px 48px -24px rgba(15,17,21,0.12);
+    animation: rise 0.45s cubic-bezier(0.16,1,0.3,1); max-width: 1100px; margin: 0 auto;
   }
+  .compare-grid {
+    display: flex; flex-direction: row; align-items: stretch; justify-content: center;
+    gap: 12px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 8px;
+    scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+  }
+  .compare-grid::-webkit-scrollbar { height: 4px; }
+  .compare-grid::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+  .compare-stock-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+    min-width: 220px; max-width: 260px; flex: 0 0 220px; display: flex; flex-direction: column;
+  }
+  .compare-stock-card .c-sym { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--accent-deep); margin-bottom: 4px; }
+  .compare-stock-card .c-name { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 14px; line-height: 1.2; min-height: 42px; }
+  .compare-stock-card .c-price { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+  .compare-stock-card .c-delta { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; margin-bottom: 16px; min-height: 18px; }
+  .compare-stock-card .c-stats { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); padding-top: 14px; margin-top: auto; }
+  .compare-stock-card .c-stat-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .compare-stock-card .c-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  .compare-stock-card .c-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+
+  /* ---------- Ask result ---------- */
+  .ask-result-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 32px 36px;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 24px 48px -24px rgba(15,17,21,0.12);
+    animation: rise 0.45s cubic-bezier(0.16,1,0.3,1);
+  }
+  .ask-q { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; color: var(--ink); margin-bottom: 20px; line-height: 1.3; }
+
+  footer { text-align: center; padding: 32px 24px 60px; color: var(--muted); font-size: 12.5px; font-family: 'JetBrains Mono', monospace; }
 
   @media (max-width: 540px) {
     .hero { padding: 56px 20px 36px; }
@@ -373,1101 +389,666 @@
     .price-block .price { font-size: 30px; }
     .result-top { flex-direction: column; }
     .price-block { text-align: left; }
+    .signal-disclaimer { display: none; }
   }
 
-  /* keyboard focus visibility */
-  button:focus-visible, input:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+  /* ---------- Watchlist ---------- */
+  .watchlist-box {
+    display: none; flex-direction: column; gap: 16px;
+    max-width: 600px; margin: 0 auto; width: 100%;
   }
+  .watchlist-box.active { display: flex; }
 
-  /* ---------- Mode tabs ---------- */
-  .mode-tabs {
-    display: flex;
-    gap: 4px;
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-
-  .mode-tab {
-    font-family: 'Inter', sans-serif;
-    font-size: 13.5px;
-    font-weight: 600;
-    padding: 8px 20px;
-    border-radius: 100px;
-    border: 1.5px solid var(--line);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .mode-tab.active {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
-
-  .mode-tab:hover:not(.active) {
-    border-color: var(--accent);
-    color: var(--accent-deep);
-  }
-
-  /* ---------- Compare flow ---------- */
-  .compare-box {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    max-width: 520px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .compare-box.active { display: flex; }
-
-  /* Step 1 — count pills */
-  .count-pills {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .count-pill {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    border: 1.5px solid var(--line);
-    background: var(--card);
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    box-shadow: 0 1px 2px rgba(15,17,21,0.04);
-  }
-
-  .count-pill:hover {
-    border-color: var(--accent);
-    color: var(--accent-deep);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px -6px rgba(61,90,254,0.25);
-  }
-
-  .count-pill:active { transform: scale(0.95); }
-
-  /* Step 2 — stacked ticker inputs */
-  #tickerBoxes {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .ticker-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--card);
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 8px 8px 8px 20px;
-    box-shadow: 0 1px 2px rgba(15,17,21,0.04);
-    transition: border-color 0.18s ease, box-shadow 0.18s ease;
-  }
-
-  .ticker-row:focus-within {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(61,90,254,0.10);
-  }
-
-  .ticker-row .row-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-    min-width: 20px;
-  }
-
-  .ticker-row input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .ticker-row input::placeholder {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    text-transform: none;
-    color: #B4B0A8;
-    font-size: 14px;
-    letter-spacing: 0;
-  }
-
-  /* Compare button full-width */
-  #compareBtn {
-    width: 100%;
-    background: var(--ink);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 15px 22px;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
-  }
-
-  #compareBtn:hover { background: var(--accent-deep); }
-  #compareBtn:active { transform: scale(0.98); }
-  #compareBtn:disabled { background: #C4C2BC; cursor: not-allowed; }
-
-  /* ---------- Compare cards ---------- */
-  .compare-grid {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--line) transparent;
-  }
-
-  .compare-grid::-webkit-scrollbar { height: 4px; }
-  .compare-grid::-webkit-scrollbar-track { background: transparent; }
-  .compare-grid::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
-
-  .compare-result-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 36px;
-    box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 24px 48px -24px rgba(15,17,21,0.12);
-    animation: rise 0.45s cubic-bezier(0.16,1,0.3,1);
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .compare-result-area {
-    padding: 0 24px 100px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .compare-stock-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 20px;
-    min-width: 220px;
-    max-width: 260px;
-    flex: 0 0 220px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .compare-stock-card .c-sym {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--accent-deep);
-    margin-bottom: 4px;
-  }
-
-  .compare-stock-card .c-name {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 14px;
-    line-height: 1.2;
-    min-height: 42px;
-  }
-
-  .compare-stock-card .c-price {
-    font-family: 'Fraunces', serif;
-    font-size: 26px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .compare-stock-card .c-delta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    min-height: 18px;
-  }
-
-  .compare-stock-card .c-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-top: 1px solid var(--line);
-    padding-top: 14px;
-    margin-top: auto;
-  }
-
-  .compare-stock-card .c-stat-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  .compare-stock-card .c-stat-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-  }
-
-  .compare-stock-card .c-stat-val {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  /* ---------- Signal badge ---------- */
-  .signal-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    padding: 16px 20px;
-    border-radius: 12px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-  }
-
-  .signal-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 8px 18px;
-    border-radius: 8px;
-    text-transform: uppercase;
-  }
-
-  .signal-badge.BUY {
-    background: rgba(22,163,74,0.12);
-    color: #15803D;
-    border: 1.5px solid rgba(22,163,74,0.3);
-  }
-
-  .signal-badge.SELL {
-    background: rgba(220,38,38,0.10);
-    color: #B91C1C;
-    border: 1.5px solid rgba(220,38,38,0.25);
-  }
-
-  .signal-badge.HOLD {
-    background: rgba(217,119,6,0.10);
-    color: #B45309;
-    border: 1.5px solid rgba(217,119,6,0.25);
-  }
-
-  .signal-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .signal-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .signal-confidence {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .signal-disclaimer {
-    font-size: 11px;
-    color: var(--muted);
-    margin-left: auto;
-    text-align: right;
-    max-width: 200px;
-    line-height: 1.4;
-  }
-  .chart-section {
-    margin-bottom: 24px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .chart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 16px 12px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .chart-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-
-  .period-tabs {
-    display: flex;
-    gap: 2px;
-  }
-
-  .period-tab {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    font-weight: 600;
-    padding: 5px 10px;
-    border-radius: 6px;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.12s ease;
-  }
-
-  .period-tab:hover { background: var(--bg); color: var(--ink); }
-
-  .period-tab.active {
-    background: var(--ink);
-    color: #fff;
-  }
-
-  .chart-wrap {
-    padding: 16px;
-    background: var(--card);
-    transition: opacity 0.2s ease;
-  }
-
-  .chart-wrap canvas { max-height: 200px; }
-
-  /* ---------- Ask AI section ---------- */
-  .ask-box {
-    display: none;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 520px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .ask-box.active { display: flex; }
-
-  .ask-input-wrap {
-    background: var(--card);
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    overflow: hidden;
+  .watchlist-input-wrap {
+    display: flex; gap: 10px; background: var(--card);
+    border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 6px 6px 6px 20px;
     box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 12px 32px -16px rgba(15,17,21,0.10);
     transition: border-color 0.18s ease, box-shadow 0.18s ease;
   }
-
-  .ask-input-wrap:focus-within {
+  .watchlist-input-wrap:focus-within {
     border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(61,90,254,0.10);
   }
-
-  .ask-input-wrap textarea {
-    width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    color: var(--ink);
-    padding: 18px 20px 10px;
-    resize: none;
-    line-height: 1.5;
+  .watchlist-input-wrap input {
+    flex: 1; border: none; outline: none; background: transparent;
+    font-family: 'JetBrains Mono', monospace; font-size: 15px;
+    font-weight: 600; color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase;
   }
-
-  .ask-input-wrap textarea::placeholder { color: #B4B0A8; }
-
-  .ask-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 12px 12px 20px;
+  .watchlist-input-wrap input::placeholder {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    text-transform: none; color: #B4B0A8; font-size: 14px; letter-spacing: 0;
   }
-
-  .ask-counter {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
+  #watchlistAddBtn {
+    background: var(--ink); color: #fff; border: none; border-radius: 9px;
+    padding: 11px 20px; font-family: 'Inter', sans-serif; font-size: 14px;
+    font-weight: 600; cursor: pointer; white-space: nowrap;
+    transition: background 0.15s ease;
   }
+  #watchlistAddBtn:hover { background: var(--accent-deep); }
+  #watchlistAddBtn:disabled { background: #C4C2BC; cursor: not-allowed; }
 
-  #askBtn {
-    background: var(--ink);
-    color: #fff;
-    border: none;
-    border-radius: 9px;
-    padding: 10px 20px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
-  }
-
-  #askBtn:hover { background: var(--accent-deep); }
-  #askBtn:active { transform: scale(0.97); }
-  #askBtn:disabled { background: #C4C2BC; cursor: not-allowed; }
-
-  .ask-suggestions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .ask-chip {
-    font-family: 'Inter', sans-serif;
-    font-size: 12.5px;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--line);
-    padding: 6px 14px;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-
-  .ask-chip:hover { border-color: var(--accent); color: var(--accent-deep); }
-
-  /* Ask result card */
-  .ask-result-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 32px 36px;
+  /* Watchlist result card */
+  .watchlist-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px 32px;
     box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 24px 48px -24px rgba(15,17,21,0.12);
     animation: rise 0.45s cubic-bezier(0.16,1,0.3,1);
   }
-
-  .ask-q {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 20px;
-    line-height: 1.3;
+  .watchlist-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
   }
-
-  .ask-a {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #2A2D33;
+  .watchlist-title {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--ink);
   }
+  .watchlist-count {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);
+  }
+  .watchlist-empty {
+    text-align: center; padding: 32px; color: var(--muted); font-size: 14px; line-height: 1.6;
+  }
+  .watchlist-table {
+    width: 100%; border-collapse: collapse;
+  }
+  .watchlist-table th {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); padding: 0 12px 10px 0; text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  .watchlist-table th:last-child { text-align: right; padding-right: 0; }
+  .watchlist-table td {
+    padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle;
+  }
+  .watchlist-table tr:last-child td { border-bottom: none; }
+  .wl-ticker {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    font-weight: 700; color: var(--accent-deep); letter-spacing: 0.04em;
+  }
+  .wl-name { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .wl-price {
+    font-family: 'JetBrains Mono', monospace; font-size: 15px;
+    font-weight: 600; color: var(--ink);
+  }
+  .wl-chg {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+  }
+  .wl-chg.up { color: var(--gain); }
+  .wl-chg.down { color: var(--loss); }
+  .wl-chg.flat { color: var(--muted); }
+  .wl-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  .wl-remove {
+    background: none; border: 1px solid var(--line); border-radius: 6px;
+    padding: 5px 10px; font-size: 12px; color: var(--muted); cursor: pointer;
+    transition: all 0.12s ease; float: right;
+  }
+  .wl-remove:hover { border-color: var(--loss); color: var(--loss); background: rgba(220,38,38,0.05); }
+
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 </style>
 </head>
 <body>
 
-  <div class="ticker-wrap">
-    <div class="ticker-track" id="tickerTrack">
-      <!-- populated by JS, duplicated once for seamless loop -->
-    </div>
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">Local AI · Real-time data</span>
+  <h1>Ask the market<br><em>anything.</em></h1>
+  <p class="sub">Type a ticker. Get live pricing pulled straight from Yahoo Finance, analyzed instantly by a model running entirely on your machine.</p>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" data-mode="analyze">Analyze</button>
+    <button class="mode-tab" data-mode="compare">Compare</button>
+    <button class="mode-tab" data-mode="ask">Ask AI</button>
+    <button class="mode-tab" data-mode="watchlist">Watchlist</button>
   </div>
 
-  <div class="hero">
-    <span class="eyebrow">Local AI · Real-time data</span>
-    <h1>Ask the market<br><em>anything.</em></h1>
-    <p class="sub">Type a ticker. Get live pricing pulled straight from Yahoo Finance, analyzed instantly by a model running entirely on your machine.</p>
-
-    <div class="mode-tabs">
-      <button class="mode-tab active" data-mode="analyze">Analyze</button>
-      <button class="mode-tab" data-mode="compare">Compare</button>
-      <button class="mode-tab" data-mode="ask">Ask AI</button>
-    </div>
-
-    <div class="search-section" id="analyzeSection">
+  <!-- Analyze -->
+  <div id="analyzeSection">
     <form class="search-box" id="searchForm">
-      <input
-        type="text"
-        id="tickerInput"
-        placeholder="AAPL, MSFT, TSLA…"
-        autocomplete="off"
-        spellcheck="false"
-        maxlength="10"
-      >
+      <input type="text" id="tickerInput" placeholder="AAPL, MSFT, TSLA…" autocomplete="off" spellcheck="false" maxlength="10">
       <button type="submit" id="searchBtn">Analyze</button>
     </form>
-
     <div class="hint-row">
       <button type="button" class="hint-chip" data-ticker="AAPL">AAPL</button>
       <button type="button" class="hint-chip" data-ticker="NVDA">NVDA</button>
       <button type="button" class="hint-chip" data-ticker="TSLA">TSLA</button>
       <button type="button" class="hint-chip" data-ticker="MSFT">MSFT</button>
     </div>
-    </div>
+  </div>
 
-    <div class="compare-box" id="compareSection">
-      <!-- Step 1: ask how many -->
-      <div id="compareStep1">
-        <p class="compare-hint" style="margin-bottom:14px;font-size:15px;color:var(--ink);font-weight:500;">How many stocks do you want to compare?</p>
-        <div class="count-pills">
-          <button class="count-pill" data-count="2">2</button>
-          <button class="count-pill" data-count="3">3</button>
-          <button class="count-pill" data-count="4">4</button>
-          <button class="count-pill" data-count="5">5</button>
-        </div>
-      </div>
-      <!-- Step 2: ticker boxes (hidden until count chosen) -->
-      <div id="compareStep2" style="display:none;width:100%;">
-        <div id="tickerBoxes"></div>
-        <button type="button" id="compareBtn" style="width:100%;margin-top:4px;">Compare</button>
-        <button type="button" id="compareReset" class="compare-hint" style="background:none;border:none;cursor:pointer;margin-top:10px;text-decoration:underline;">← Choose different count</button>
+  <!-- Compare -->
+  <div class="compare-box" id="compareSection">
+    <div id="compareStep1">
+      <p class="compare-hint" style="margin-bottom:14px;font-size:15px;color:var(--ink);font-weight:500;">How many stocks do you want to compare?</p>
+      <div class="count-pills">
+        <button class="count-pill" data-count="2">2</button>
+        <button class="count-pill" data-count="3">3</button>
+        <button class="count-pill" data-count="4">4</button>
+        <button class="count-pill" data-count="5">5</button>
       </div>
     </div>
-
-    <!-- Ask AI section -->
-    <div class="ask-box" id="askSection">
-      <div class="ask-input-wrap">
-        <textarea
-          id="askInput"
-          placeholder="Ask anything financial… e.g. What is dollar cost averaging? How do interest rates affect stocks?"
-          rows="3"
-          maxlength="500"
-          spellcheck="true"
-        ></textarea>
-        <div class="ask-footer">
-          <span class="ask-counter" id="askCounter">0 / 500</span>
-          <button type="button" id="askBtn">Ask AI</button>
-        </div>
-      </div>
-      <div class="ask-suggestions">
-        <button class="ask-chip" data-q="What is dollar cost averaging?">Dollar cost averaging</button>
-        <button class="ask-chip" data-q="How do interest rates affect the stock market?">Interest rates & stocks</button>
-        <button class="ask-chip" data-q="What is the difference between a stock and a bond?">Stocks vs bonds</button>
-        <button class="ask-chip" data-q="What does market capitalization mean?">Market cap explained</button>
-      </div>
+    <div id="compareStep2" style="display:none;width:100%;">
+      <div id="tickerBoxes"></div>
+      <button type="button" id="compareBtn" style="margin-top:4px;">Compare</button>
+      <button type="button" id="compareReset" class="compare-hint" style="background:none;border:none;cursor:pointer;margin-top:10px;text-decoration:underline;">← Choose different count</button>
     </div>
   </div>
 
-  <div class="result-area" id="resultArea"></div>
+  <!-- Ask AI -->
+  <div class="ask-box" id="askSection">
+    <div class="ask-input-wrap">
+      <textarea id="askInput" placeholder="Ask anything financial… e.g. What is dollar cost averaging? How do interest rates affect stocks?" rows="3" maxlength="500" spellcheck="true"></textarea>
+      <div class="ask-footer">
+        <span class="ask-counter" id="askCounter">0 / 500</span>
+        <button type="button" id="askBtn">Ask AI</button>
+      </div>
+    </div>
+    <div class="ask-suggestions">
+      <button class="ask-chip" data-q="What is dollar cost averaging?">Dollar cost averaging</button>
+      <button class="ask-chip" data-q="How do interest rates affect the stock market?">Interest rates & stocks</button>
+      <button class="ask-chip" data-q="What is the difference between a stock and a bond?">Stocks vs bonds</button>
+      <button class="ask-chip" data-q="What does market capitalization mean?">Market cap explained</button>
+    </div>
+  </div>
 
-  <footer>FinanceGPT — powered by Llama 3.1, running locally via Ollama</footer>
+  <!-- Watchlist -->
+  <div class="watchlist-box" id="watchlistSection">
+    <div class="watchlist-add-row">
+      <div class="watchlist-input-wrap">
+        <input type="text" id="watchlistInput" placeholder="Add ticker… e.g. TSLA" autocomplete="off" spellcheck="false" maxlength="10">
+        <button type="button" id="watchlistAddBtn">+ Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="result-area" id="resultArea"></div>
+
+<footer>FinanceGPT — powered by Llama 3.2, running locally via Ollama</footer>
 
 <script>
-  const API_BASE = '';
-  let currentMode = 'analyze';
-  let chartInstance = null;
+const API_BASE = '';
+let currentMode = 'analyze';
+let stockChartInstance = null;
+let compareChartInstance = null;
+let currentTicker = null;
 
-  // ---------- Ticker tape ----------
-  async function loadTickerTape() {
-    const track = document.getElementById('tickerTrack');
-    try {
-      const res = await fetch(`${API_BASE}/ticker-stats`);
-      const data = await res.json();
-      const items = data.stocks.filter(s => s.price !== null);
-      if (!items.length) return;
-      const renderSet = () => items.map(s => {
-        const dir = s.change_pct > 0 ? 'up' : s.change_pct < 0 ? 'down' : 'flat';
-        const arrow = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '·';
-        const pct = s.change_pct !== null ? `${arrow} ${Math.abs(s.change_pct).toFixed(2)}%` : '—';
-        return `<span class="ticker-item"><span class="sym">${s.ticker}</span><span>$${s.price.toFixed(2)}</span><span class="chg ${dir}">${pct}</span></span>`;
-      }).join('');
-      track.innerHTML = renderSet() + renderSet();
-    } catch (err) {
-      track.innerHTML = '<span class="ticker-item"><span class="sym">FinanceGPT</span><span>Live data unavailable</span></span>';
-    }
-  }
-
-  // ---------- Mode tabs ----------
-  document.querySelectorAll('.mode-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      currentMode = tab.dataset.mode;
-      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('analyzeSection').style.display = currentMode === 'analyze' ? 'block' : 'none';
-      document.getElementById('compareSection').classList.toggle('active', currentMode === 'compare');
-      document.getElementById('askSection').classList.toggle('active', currentMode === 'ask');
-      resultArea.innerHTML = '';
-      resultArea.style.maxWidth = currentMode === 'compare' ? '1100px' : '720px';
-    });
-  });
-
-  // ---------- Helpers ----------
-  const resultArea = document.getElementById('resultArea');
-
-  function fmtNum(n) {
-    if (n === null || n === undefined) return '—';
-    return n.toLocaleString('en-US');
-  }
-
-  function fmtMarketCap(n) {
-    if (n === null || n === undefined) return '—';
-    if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-    if (n >= 1e9) return `$${(n / 1e9).toFixed(2)}B`;
-    if (n >= 1e6) return `$${(n / 1e6).toFixed(2)}M`;
-    return `$${n}`;
-  }
-
-  function showLoading(msg) {
-    resultArea.innerHTML = `<div class="state-msg"><div class="spinner"></div>${msg}</div>`;
-  }
-
-  // ---------- Single stock analyze ----------
-  const form = document.getElementById('searchForm');
-  const input = document.getElementById('tickerInput');
-  const btn = document.getElementById('searchBtn');
-
-  async function runSearch(ticker) {
-    ticker = ticker.trim().toUpperCase();
-    if (!ticker) return;
-    btn.disabled = true;
-    btn.textContent = 'Analyzing…';
-    showLoading(`Pulling live data and running local analysis on <strong>${ticker}</strong>…`);
-    try {
-      const res = await fetch(`${API_BASE}/analyze/${encodeURIComponent(ticker)}`);
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || `Request failed (${res.status})`);
-      }
-      const data = await res.json();
-      renderResult(data);
-    } catch (err) {
-      resultArea.innerHTML = `<div class="state-msg error">${err.message || 'Something went wrong.'}</div>`;
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Analyze';
-    }
-  }
-
-  let stockChartInstance = null;
-  let currentTicker = null;
-
-  function renderResult(data) {
-    const s = data.stock_data;
-    currentTicker = s.ticker;
-    const change = (s.current_price !== null && s.previous_close) ? s.current_price - s.previous_close : null;
-    const changePct = (change !== null && s.previous_close) ? (change / s.previous_close) * 100 : null;
-    const dir = change > 0 ? 'up' : change < 0 ? 'down' : '';
-    const arrow = change > 0 ? '▲' : change < 0 ? '▼' : '';
-
-    const signal = data.signal || 'HOLD';
-    const confidence = data.confidence || 'LOW';
-    const reasoning = data.reasoning || '';
-    const disclaimer = data.disclaimer || 'AI-generated analysis. Not financial advice.';
-
-    resultArea.style.maxWidth = '720px';
-    resultArea.innerHTML = `
-      <div class="result-card">
-        <div class="result-top">
-          <div class="result-id">
-            <div class="sym-big">${s.ticker}</div>
-            <div class="company">${s.company_name || s.ticker}</div>
-          </div>
-          <div class="price-block">
-            <div class="price">$${s.current_price !== null ? s.current_price.toFixed(2) : '—'}</div>
-            ${change !== null ? `<div class="delta ${dir}">${arrow} ${Math.abs(change).toFixed(2)} (${Math.abs(changePct).toFixed(2)}%)</div>` : ''}
-          </div>
-        </div>
-
-        <div class="signal-row">
-          <div class="signal-badge ${signal}">${signal}</div>
-          <div class="signal-meta">
-            <span class="signal-label">AI Signal</span>
-            <span class="signal-confidence">${confidence} Confidence</span>
-          </div>
-          <span class="signal-disclaimer">${disclaimer}</span>
-        </div>
-
-        <div class="stat-grid">
-          <div class="stat"><div class="label">Open</div><div class="value">$${s.open_price !== null ? s.open_price.toFixed(2) : '—'}</div></div>
-          <div class="stat"><div class="label">Day range</div><div class="value">${s.day_low?.toFixed(2) ?? '—'}–${s.day_high?.toFixed(2) ?? '—'}</div></div>
-          <div class="stat"><div class="label">52w range</div><div class="value">${s.fifty_two_week_low?.toFixed(2) ?? '—'}–${s.fifty_two_week_high?.toFixed(2) ?? '—'}</div></div>
-          <div class="stat"><div class="label">Volume</div><div class="value">${fmtNum(s.volume)}</div></div>
-          <div class="stat"><div class="label">Market cap</div><div class="value">${fmtMarketCap(s.market_cap)}</div></div>
-          <div class="stat"><div class="label">P/E ratio</div><div class="value">${s.pe_ratio !== null ? s.pe_ratio.toFixed(2) : '—'}</div></div>
-        </div>
-
-        <div class="chart-section">
-          <div class="chart-header">
-            <span class="chart-title">Price History</span>
-            <div class="period-tabs">
-              <button class="period-tab active" data-period="1W">1W</button>
-              <button class="period-tab" data-period="1M">1M</button>
-              <button class="period-tab" data-period="3M">3M</button>
-              <button class="period-tab" data-period="6M">6M</button>
-              <button class="period-tab" data-period="1Y">1Y</button>
-            </div>
-          </div>
-          <div class="chart-wrap">
-            <canvas id="stockChart"></canvas>
-          </div>
-        </div>
-
-        <div class="analysis-block">
-          <div class="label">AI Analysis</div>
-          <p>${data.ai_analysis}</p>
-        </div>
-
-        ${reasoning ? `
-        <div class="analysis-block" style="margin-top:16px;">
-          <div class="label">Signal Reasoning</div>
-          <p>${reasoning}</p>
-        </div>` : ''}
-      </div>
-    `;
-
-    loadChart(s.ticker, '1M');
-
-    document.querySelectorAll('.period-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        loadChart(currentTicker, tab.dataset.period);
-      });
-    });
-  }
-
-  async function loadChart(ticker, period) {
-    const canvas = document.getElementById('stockChart');
-    if (!canvas) return;
-
-    // Show loading state on canvas
-    const wrap = canvas.parentElement;
-    wrap.style.opacity = '0.5';
-
-    try {
-      const res = await fetch(`${API_BASE}/history/${ticker}?period=${period}`);
-      if (!res.ok) throw new Error('Failed to fetch history');
-      const data = await res.json();
-
-      if (stockChartInstance) { stockChartInstance.destroy(); stockChartInstance = null; }
-
-      const isPositive = data.prices[data.prices.length - 1] >= data.prices[0];
-      const lineColor = isPositive ? '#16A34A' : '#DC2626';
-      const fillColor = isPositive ? 'rgba(22,163,74,0.08)' : 'rgba(220,38,38,0.08)';
-
-      const ctx = canvas.getContext('2d');
-      stockChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: data.labels,
-          datasets: [{
-            data: data.prices,
-            borderColor: lineColor,
-            backgroundColor: fillColor,
-            borderWidth: 2,
-            pointRadius: 0,
-            pointHoverRadius: 4,
-            pointHoverBackgroundColor: lineColor,
-            fill: true,
-            tension: 0.3,
-          }]
-        },
-        options: {
-          responsive: true,
-          interaction: { mode: 'index', intersect: false },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              backgroundColor: '#0F1115',
-              titleFont: { family: 'JetBrains Mono', size: 11 },
-              bodyFont: { family: 'JetBrains Mono', size: 13 },
-              callbacks: {
-                title: ctx => ctx[0].label,
-                label: ctx => ` $${ctx.parsed.y.toFixed(2)}`,
-              }
-            }
-          },
-          scales: {
-            x: {
-              ticks: {
-                font: { family: 'JetBrains Mono', size: 10 },
-                color: '#6E6A64',
-                maxTicksLimit: 6,
-                maxRotation: 0,
-              },
-              grid: { display: false },
-              border: { display: false },
-            },
-            y: {
-              position: 'right',
-              ticks: {
-                font: { family: 'JetBrains Mono', size: 10 },
-                color: '#6E6A64',
-                callback: v => '$' + v.toFixed(0),
-              },
-              grid: { color: '#F0EEE9' },
-              border: { display: false },
-            }
-          }
-        }
-      });
-    } catch (err) {
-      wrap.innerHTML = '<div style="text-align:center;padding:24px;color:#6E6A64;font-size:13px;">Chart unavailable</div>';
-    } finally {
-      wrap.style.opacity = '1';
-    }
-  }
-
-  form.addEventListener('submit', (e) => { e.preventDefault(); runSearch(input.value); });
-  document.querySelectorAll('.hint-chip').forEach(chip => {
-    chip.addEventListener('click', () => { input.value = chip.dataset.ticker; runSearch(chip.dataset.ticker); });
-  });
-
-  // ---------- Compare flow ----------
-  const PLACEHOLDERS = ['e.g. AAPL', 'e.g. MSFT', 'e.g. TSLA', 'e.g. NVDA', 'e.g. GOOGL'];
-
-  function buildTickerBoxes(count) {
-    const container = document.getElementById('tickerBoxes');
-    container.innerHTML = '';
-    for (let i = 0; i < count; i++) {
-      const row = document.createElement('div');
-      row.className = 'ticker-row';
-      row.innerHTML = `
-        <span class="row-num">${i + 1}</span>
-        <input
-          type="text"
-          class="compare-ticker-input"
-          placeholder="${PLACEHOLDERS[i] || 'e.g. AMZN'}"
-          autocomplete="off"
-          spellcheck="false"
-          maxlength="10"
-        >
-      `;
-      container.appendChild(row);
-
-      // Tab to next box, Enter on last triggers compare
-      const inp = row.querySelector('input');
-      inp.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          const inputs = [...document.querySelectorAll('.compare-ticker-input')];
-          const idx = inputs.indexOf(inp);
-          if (idx < inputs.length - 1) {
-            inputs[idx + 1].focus();
-          } else {
-            runCompare();
-          }
-        }
-      });
-    }
-    // Focus first box
-    const first = container.querySelector('input');
-    if (first) setTimeout(() => first.focus(), 50);
-  }
-
-  // Count pill click → show step 2
-  document.querySelectorAll('.count-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      const count = parseInt(pill.dataset.count);
-      document.getElementById('compareStep1').style.display = 'none';
-      document.getElementById('compareStep2').style.display = 'block';
-      buildTickerBoxes(count);
-    });
-  });
-
-  // Reset → back to step 1
-  document.getElementById('compareReset').addEventListener('click', () => {
-    document.getElementById('compareStep1').style.display = 'block';
-    document.getElementById('compareStep2').style.display = 'none';
-    resultArea.innerHTML = '';
-  });
-
-  // Compare button
-  document.getElementById('compareBtn').addEventListener('click', runCompare);
-
-  async function runCompare() {
-    const inputs = [...document.querySelectorAll('.compare-ticker-input')];
-    const tickers = inputs.map(i => i.value.trim().toUpperCase()).filter(Boolean);
-
-    if (tickers.length < 2) {
-      resultArea.innerHTML = `<div class="state-msg error">Please fill in at least 2 ticker symbols.</div>`;
-      return;
-    }
-
-    const compareBtn = document.getElementById('compareBtn');
-    compareBtn.disabled = true;
-    compareBtn.textContent = 'Comparing…';
-    showLoading(`Comparing <strong>${tickers.join(', ')}</strong> — fetching data and running AI analysis…`);
-
-    try {
-      const res = await fetch(`${API_BASE}/compare?tickers=${encodeURIComponent(tickers.join(','))}`);
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || `Request failed (${res.status})`);
-      }
-      const data = await res.json();
-      renderCompare(data);
-    } catch (err) {
-      resultArea.innerHTML = `<div class="state-msg error">${err.message || 'Something went wrong.'}</div>`;
-    } finally {
-      compareBtn.disabled = false;
-      compareBtn.textContent = 'Compare';
-    }
-  }
-
-  function renderCompare(data) {
-    const COLORS = ['#3D5AFE', '#16A34A', '#DC2626', '#D97706', '#7C3AED'];
-
-    const cards = data.stocks.map((s, i) => {
-      const change = s.current_price && s.previous_close ? s.current_price - s.previous_close : null;
-      const pct = change && s.previous_close ? (change / s.previous_close * 100) : null;
-      const dir = change > 0 ? 'up' : change < 0 ? 'down' : '';
-      const arrow = change > 0 ? '▲' : change < 0 ? '▼' : '';
-      return `
-        <div class="compare-stock-card" style="border-top: 3px solid ${COLORS[i % COLORS.length]}">
-          <div class="c-sym">${s.ticker}</div>
-          <div class="c-name">${s.company_name || s.ticker}</div>
-          <div class="c-price">$${s.current_price?.toFixed(2) ?? '—'}</div>
-          ${change !== null ? `<div class="c-delta ${dir}">${arrow} ${Math.abs(change).toFixed(2)} (${Math.abs(pct).toFixed(2)}%)</div>` : ''}
-          <div class="c-stats">
-            <div class="c-stat-row"><span class="c-stat-label">Mkt Cap</span><span class="c-stat-val">${fmtMarketCap(s.market_cap)}</span></div>
-            <div class="c-stat-row"><span class="c-stat-label">P/E</span><span class="c-stat-val">${s.pe_ratio?.toFixed(2) ?? '—'}</span></div>
-            <div class="c-stat-row"><span class="c-stat-label">52w High</span><span class="c-stat-val">$${s.fifty_two_week_high?.toFixed(2) ?? '—'}</span></div>
-            <div class="c-stat-row"><span class="c-stat-label">52w Low</span><span class="c-stat-val">$${s.fifty_two_week_low?.toFixed(2) ?? '—'}</span></div>
-            <div class="c-stat-row"><span class="c-stat-label">Volume</span><span class="c-stat-val">${fmtNum(s.volume)}</span></div>
-          </div>
-        </div>`;
+// ── Ticker tape ──────────────────────────────────────────────
+async function loadTickerTape() {
+  const track = document.getElementById('tickerTrack');
+  try {
+    const res = await fetch('/ticker-stats');
+    const data = await res.json();
+    const items = data.stocks.filter(s => s.price !== null);
+    if (!items.length) return;
+    const renderSet = () => items.map(s => {
+      const dir = s.change_pct > 0 ? 'up' : s.change_pct < 0 ? 'down' : 'flat';
+      const arrow = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '·';
+      const pct = s.change_pct !== null ? `${arrow} ${Math.abs(s.change_pct).toFixed(2)}%` : '—';
+      return `<span class="ticker-item"><span class="sym">${s.ticker}</span><span>$${s.price.toFixed(2)}</span><span class="chg ${dir}">${pct}</span></span>`;
     }).join('');
+    track.innerHTML = renderSet() + renderSet();
+  } catch {
+    track.innerHTML = '<span class="ticker-item"><span class="sym">FinanceGPT</span><span>Live data unavailable</span></span>';
+  }
+}
 
-    // Chart: current price bar chart
-    const chartId = 'compareChart';
-    resultArea.style.maxWidth = '1100px';
-    resultArea.innerHTML = `
-      <div class="compare-result-card">
-        <div class="compare-grid">${cards}</div>
-        <div class="chart-wrap">
-          <canvas id="${chartId}"></canvas>
+// ── Mode tabs ─────────────────────────────────────────────────
+const resultArea = document.getElementById('resultArea');
+
+document.querySelectorAll('.mode-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    currentMode = tab.dataset.mode;
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('analyzeSection').style.display = currentMode === 'analyze' ? 'block' : 'none';
+    document.getElementById('compareSection').classList.toggle('active', currentMode === 'compare');
+    document.getElementById('askSection').classList.toggle('active', currentMode === 'ask');
+    document.getElementById('watchlistSection').classList.toggle('active', currentMode === 'watchlist');
+    resultArea.innerHTML = '';
+    resultArea.style.maxWidth = currentMode === 'compare' ? '1100px' : '720px';
+    if (currentMode === 'watchlist') loadWatchlist();
+  });
+});
+
+// ── Helpers ───────────────────────────────────────────────────
+function fmtNum(n) { return (n == null) ? '—' : n.toLocaleString('en-US'); }
+function fmtCap(n) {
+  if (n == null) return '—';
+  if (n >= 1e12) return `$${(n/1e12).toFixed(2)}T`;
+  if (n >= 1e9)  return `$${(n/1e9).toFixed(2)}B`;
+  if (n >= 1e6)  return `$${(n/1e6).toFixed(2)}M`;
+  return `$${n}`;
+}
+function showLoading(msg) {
+  resultArea.innerHTML = `<div class="state-msg"><div class="spinner"></div>${msg}</div>`;
+}
+
+// ── Analyze ───────────────────────────────────────────────────
+const searchForm = document.getElementById('searchForm');
+const tickerInput = document.getElementById('tickerInput');
+const searchBtn = document.getElementById('searchBtn');
+
+async function runSearch(ticker) {
+  ticker = ticker.trim().toUpperCase();
+  if (!ticker) return;
+  searchBtn.disabled = true;
+  searchBtn.textContent = 'Analyzing…';
+  showLoading(`Pulling live data and running local analysis on <strong>${ticker}</strong>…`);
+  try {
+    const res = await fetch(`/analyze/${encodeURIComponent(ticker)}`);
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.detail || `Error ${res.status}`); }
+    renderResult(await res.json());
+  } catch (e) {
+    resultArea.innerHTML = `<div class="state-msg error">${e.message}</div>`;
+  } finally {
+    searchBtn.disabled = false;
+    searchBtn.textContent = 'Analyze';
+  }
+}
+
+function renderResult(data) {
+  const s = data.stock_data;
+  currentTicker = s.ticker;
+  const chg = (s.current_price != null && s.previous_close) ? s.current_price - s.previous_close : null;
+  const pct = (chg != null && s.previous_close) ? (chg / s.previous_close * 100) : null;
+  const dir = chg > 0 ? 'up' : chg < 0 ? 'down' : '';
+  const arrow = chg > 0 ? '▲' : chg < 0 ? '▼' : '';
+  const signal = data.signal || 'HOLD';
+  const confidence = data.confidence || 'LOW';
+  const reasoning = data.reasoning || '';
+  const disclaimer = data.disclaimer || 'AI-generated. Not financial advice.';
+
+  resultArea.style.maxWidth = '720px';
+  resultArea.innerHTML = `
+    <div class="result-card">
+      <div class="result-top">
+        <div class="result-id">
+          <div class="sym-big">${s.ticker}</div>
+          <div class="company">${s.company_name || s.ticker}</div>
         </div>
-        <div class="analysis-block">
-          <div class="label">AI Comparison</div>
-          <p>${data.ai_analysis}</p>
+        <div class="price-block">
+          <div class="price">$${s.current_price != null ? s.current_price.toFixed(2) : '—'}</div>
+          ${chg != null ? `<div class="delta ${dir}">${arrow} ${Math.abs(chg).toFixed(2)} (${Math.abs(pct).toFixed(2)}%)</div>` : ''}
         </div>
       </div>
-    `;
 
-    // Destroy previous chart instance if any
-    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+      <div class="signal-row">
+        <div class="signal-badge ${signal}">${signal}</div>
+        <div class="signal-meta">
+          <span class="signal-label">AI Signal</span>
+          <span class="signal-confidence">${confidence} Confidence</span>
+        </div>
+        <span class="signal-disclaimer">${disclaimer}</span>
+      </div>
 
-    const ctx = document.getElementById(chartId).getContext('2d');
-    chartInstance = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: data.stocks.map(s => s.ticker),
-        datasets: [{
-          label: 'Current Price (USD)',
-          data: data.stocks.map(s => s.current_price),
-          backgroundColor: COLORS.slice(0, data.stocks.length).map(c => c + '22'),
-          borderColor: COLORS.slice(0, data.stocks.length),
-          borderWidth: 2,
-          borderRadius: 6,
-        }]
-      },
+      <div class="stat-grid">
+        <div class="stat"><div class="label">Open</div><div class="value">$${s.open_price != null ? s.open_price.toFixed(2) : '—'}</div></div>
+        <div class="stat"><div class="label">Day range</div><div class="value">${s.day_low?.toFixed(2) ?? '—'}–${s.day_high?.toFixed(2) ?? '—'}</div></div>
+        <div class="stat"><div class="label">52w range</div><div class="value">${s.fifty_two_week_low?.toFixed(2) ?? '—'}–${s.fifty_two_week_high?.toFixed(2) ?? '—'}</div></div>
+        <div class="stat"><div class="label">Volume</div><div class="value">${fmtNum(s.volume)}</div></div>
+        <div class="stat"><div class="label">Market cap</div><div class="value">${fmtCap(s.market_cap)}</div></div>
+        <div class="stat"><div class="label">P/E ratio</div><div class="value">${s.pe_ratio != null ? s.pe_ratio.toFixed(2) : '—'}</div></div>
+      </div>
+
+      <div class="chart-section">
+        <div class="chart-header">
+          <span class="chart-title">Price History</span>
+          <div class="period-tabs">
+            <button class="period-tab active" data-period="1W">1W</button>
+            <button class="period-tab" data-period="1M">1M</button>
+            <button class="period-tab" data-period="3M">3M</button>
+            <button class="period-tab" data-period="6M">6M</button>
+            <button class="period-tab" data-period="1Y">1Y</button>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="stockChart"></canvas></div>
+      </div>
+
+      <div class="analysis-block">
+        <div class="label">AI Analysis</div>
+        <p>${data.ai_analysis}</p>
+      </div>
+
+      ${reasoning ? `<div class="analysis-block" style="margin-top:16px;"><div class="label">Signal Reasoning</div><p>${reasoning}</p></div>` : ''}
+
+      <div class="news-block" id="newsBlock">
+        <div class="news-header">
+          <span class="news-title-label">Latest News</span>
+          <span class="news-loading" id="newsLoading">Loading…</span>
+        </div>
+        <div id="newsContent"></div>
+      </div>
+    </div>
+  `;
+
+  loadChart(s.ticker, '1M');
+  loadNews(s.ticker);
+
+  document.querySelectorAll('.period-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadChart(currentTicker, tab.dataset.period);
+    });
+  });
+}
+
+// ── Chart ─────────────────────────────────────────────────────
+async function loadChart(ticker, period) {
+  const canvas = document.getElementById('stockChart');
+  if (!canvas) return;
+  const wrap = canvas.parentElement;
+  wrap.style.opacity = '0.5';
+  try {
+    const res = await fetch(`/history/${ticker}?period=${period}`);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    if (stockChartInstance) { stockChartInstance.destroy(); stockChartInstance = null; }
+    const up = data.prices[data.prices.length - 1] >= data.prices[0];
+    const lineColor = up ? '#16A34A' : '#DC2626';
+    const fillColor = up ? 'rgba(22,163,74,0.08)' : 'rgba(220,38,38,0.08)';
+    stockChartInstance = new Chart(canvas.getContext('2d'), {
+      type: 'line',
+      data: { labels: data.labels, datasets: [{ data: data.prices, borderColor: lineColor, backgroundColor: fillColor, borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, pointHoverBackgroundColor: lineColor, fill: true, tension: 0.3 }] },
       options: {
         responsive: true,
+        interaction: { mode: 'index', intersect: false },
         plugins: {
           legend: { display: false },
-          tooltip: {
-            callbacks: { label: ctx => ` $${ctx.parsed.y.toFixed(2)}` }
-          }
+          tooltip: { backgroundColor: '#0F1115', titleFont: { family: 'JetBrains Mono', size: 11 }, bodyFont: { family: 'JetBrains Mono', size: 13 }, callbacks: { title: c => c[0].label, label: c => ` $${c.parsed.y.toFixed(2)}` } }
         },
         scales: {
-          y: {
-            ticks: { callback: v => '$' + v, font: { family: 'JetBrains Mono' } },
-            grid: { color: '#E8E6E1' }
-          },
-          x: { ticks: { font: { family: 'JetBrains Mono', weight: '600' } }, grid: { display: false } }
+          x: { ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#6E6A64', maxTicksLimit: 6, maxRotation: 0 }, grid: { display: false }, border: { display: false } },
+          y: { position: 'right', ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#6E6A64', callback: v => '$' + v.toFixed(0) }, grid: { color: '#F0EEE9' }, border: { display: false } }
         }
       }
     });
+  } catch {
+    wrap.innerHTML = '<div style="text-align:center;padding:24px;color:#6E6A64;font-size:13px;">Chart unavailable</div>';
+  } finally {
+    wrap.style.opacity = '1';
   }
+}
 
-  // ---------- Ask AI ----------
-  const askInput = document.getElementById('askInput');
-  const askBtn = document.getElementById('askBtn');
-  const askCounter = document.getElementById('askCounter');
+// ── News ──────────────────────────────────────────────────────
+async function loadNews(ticker) {
+  const loading = document.getElementById('newsLoading');
+  const content = document.getElementById('newsContent');
+  if (!loading || !content) return;
+  try {
+    const res = await fetch(`/news/${ticker}`);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const colors = { POSITIVE: '#16A34A', NEGATIVE: '#DC2626', NEUTRAL: '#6E6A64', MIXED: '#D97706' };
+    loading.innerHTML = `<span class="news-sentiment" style="color:${colors[data.sentiment] || '#6E6A64'}">● ${data.sentiment}</span>`;
+    const themes = data.key_themes.map(t => `<span class="news-theme">${t}</span>`).join('');
+    const headlines = data.headlines.slice(0, 6).map(h => `
+      <a class="news-item" href="${h.link}" target="_blank" rel="noopener">
+        <span class="news-item-title">${h.title}</span>
+        <span class="news-item-meta">${h.publisher} · ${h.published}</span>
+      </a>`).join('');
+    content.innerHTML = `<p class="news-summary">${data.summary}</p><div class="news-themes">${themes}</div><div class="news-list">${headlines}</div>`;
+  } catch {
+    if (loading) loading.textContent = 'News unavailable';
+  }
+}
 
-  askInput.addEventListener('input', () => {
-    askCounter.textContent = `${askInput.value.length} / 500`;
-  });
+// ── Compare ───────────────────────────────────────────────────
+const PLACEHOLDERS = ['e.g. AAPL', 'e.g. MSFT', 'e.g. TSLA', 'e.g. NVDA', 'e.g. GOOGL'];
 
-  askInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      runAsk(askInput.value);
-    }
-  });
-
-  askBtn.addEventListener('click', () => runAsk(askInput.value));
-
-  document.querySelectorAll('.ask-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      askInput.value = chip.dataset.q;
-      askCounter.textContent = `${askInput.value.length} / 500`;
-      runAsk(chip.dataset.q);
-    });
-  });
-
-  async function runAsk(question) {
-    question = question.trim();
-    if (!question) return;
-
-    askBtn.disabled = true;
-    askBtn.textContent = 'Thinking…';
-    showLoading(`Running your question through the local AI…`);
-
-    try {
-      const res = await fetch(`${API_BASE}/ask`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question }),
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || `Request failed (${res.status})`);
+function buildTickerBoxes(count) {
+  const container = document.getElementById('tickerBoxes');
+  container.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const row = document.createElement('div');
+    row.className = 'ticker-row';
+    row.innerHTML = `<span class="row-num">${i+1}</span><input type="text" class="compare-ticker-input" placeholder="${PLACEHOLDERS[i] || 'e.g. AMZN'}" autocomplete="off" spellcheck="false" maxlength="10">`;
+    container.appendChild(row);
+    row.querySelector('input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const all = [...document.querySelectorAll('.compare-ticker-input')];
+        const idx = all.indexOf(e.target);
+        if (idx < all.length - 1) all[idx+1].focus(); else runCompare();
       }
-      const data = await res.json();
-      resultArea.style.maxWidth = '720px';
-      resultArea.innerHTML = `
-        <div class="ask-result-card">
-          <div class="ask-q">"${data.question}"</div>
-          <div class="analysis-block">
-            <div class="label">AI Answer</div>
-            <p class="ask-a">${data.answer}</p>
-          </div>
-        </div>
-      `;
-    } catch (err) {
-      resultArea.innerHTML = `<div class="state-msg error">${err.message || 'Something went wrong.'}</div>`;
-    } finally {
-      askBtn.disabled = false;
-      askBtn.textContent = 'Ask AI';
+    });
+  }
+  setTimeout(() => container.querySelector('input')?.focus(), 50);
+}
+
+document.querySelectorAll('.count-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.getElementById('compareStep1').style.display = 'none';
+    document.getElementById('compareStep2').style.display = 'block';
+    buildTickerBoxes(parseInt(pill.dataset.count));
+  });
+});
+
+document.getElementById('compareReset').addEventListener('click', () => {
+  document.getElementById('compareStep1').style.display = 'block';
+  document.getElementById('compareStep2').style.display = 'none';
+  resultArea.innerHTML = '';
+});
+
+document.getElementById('compareBtn').addEventListener('click', runCompare);
+
+async function runCompare() {
+  const tickers = [...document.querySelectorAll('.compare-ticker-input')].map(i => i.value.trim().toUpperCase()).filter(Boolean);
+  if (tickers.length < 2) { resultArea.innerHTML = `<div class="state-msg error">Please fill in at least 2 tickers.</div>`; return; }
+  const btn = document.getElementById('compareBtn');
+  btn.disabled = true; btn.textContent = 'Comparing…';
+  showLoading(`Comparing <strong>${tickers.join(', ')}</strong>…`);
+  try {
+    const res = await fetch(`/compare?tickers=${encodeURIComponent(tickers.join(','))}`);
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.detail || `Error ${res.status}`); }
+    renderCompare(await res.json());
+  } catch (e) {
+    resultArea.innerHTML = `<div class="state-msg error">${e.message}</div>`;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Compare';
+  }
+}
+
+function renderCompare(data) {
+  const COLORS = ['#3D5AFE','#16A34A','#DC2626','#D97706','#7C3AED'];
+  const cards = data.stocks.map((s, i) => {
+    const chg = s.current_price && s.previous_close ? s.current_price - s.previous_close : null;
+    const pct = chg && s.previous_close ? chg / s.previous_close * 100 : null;
+    const dir = chg > 0 ? 'up' : chg < 0 ? 'down' : '';
+    const arrow = chg > 0 ? '▲' : chg < 0 ? '▼' : '';
+    return `<div class="compare-stock-card" style="border-top:3px solid ${COLORS[i%COLORS.length]}">
+      <div class="c-sym">${s.ticker}</div>
+      <div class="c-name">${s.company_name || s.ticker}</div>
+      <div class="c-price">$${s.current_price?.toFixed(2) ?? '—'}</div>
+      ${chg != null ? `<div class="c-delta ${dir}">${arrow} ${Math.abs(chg).toFixed(2)} (${Math.abs(pct).toFixed(2)}%)</div>` : '<div class="c-delta"></div>'}
+      <div class="c-stats">
+        <div class="c-stat-row"><span class="c-stat-label">Mkt Cap</span><span class="c-stat-val">${fmtCap(s.market_cap)}</span></div>
+        <div class="c-stat-row"><span class="c-stat-label">P/E</span><span class="c-stat-val">${s.pe_ratio?.toFixed(2) ?? '—'}</span></div>
+        <div class="c-stat-row"><span class="c-stat-label">52w High</span><span class="c-stat-val">$${s.fifty_two_week_high?.toFixed(2) ?? '—'}</span></div>
+        <div class="c-stat-row"><span class="c-stat-label">52w Low</span><span class="c-stat-val">$${s.fifty_two_week_low?.toFixed(2) ?? '—'}</span></div>
+        <div class="c-stat-row"><span class="c-stat-label">Volume</span><span class="c-stat-val">${fmtNum(s.volume)}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  resultArea.style.maxWidth = '1100px';
+  resultArea.innerHTML = `
+    <div class="compare-result-card">
+      <div class="compare-grid">${cards}</div>
+      <div class="chart-wrap"><canvas id="compareChart"></canvas></div>
+      <div class="analysis-block"><div class="label">AI Comparison</div><p>${data.ai_analysis}</p></div>
+    </div>`;
+
+  if (compareChartInstance) { compareChartInstance.destroy(); compareChartInstance = null; }
+  compareChartInstance = new Chart(document.getElementById('compareChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: data.stocks.map(s => s.ticker),
+      datasets: [{ data: data.stocks.map(s => s.current_price), backgroundColor: COLORS.slice(0, data.stocks.length).map(c => c+'22'), borderColor: COLORS.slice(0, data.stocks.length), borderWidth: 2, borderRadius: 6 }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` $${c.parsed.y.toFixed(2)}` } } },
+      scales: {
+        y: { ticks: { callback: v => '$'+v, font: { family: 'JetBrains Mono' } }, grid: { color: '#E8E6E1' } },
+        x: { ticks: { font: { family: 'JetBrains Mono', weight: '600' } }, grid: { display: false } }
+      }
     }
+  });
+}
+
+// ── Ask AI ────────────────────────────────────────────────────
+const askInput = document.getElementById('askInput');
+const askCounter = document.getElementById('askCounter');
+const askBtn = document.getElementById('askBtn');
+
+askInput.addEventListener('input', () => { askCounter.textContent = `${askInput.value.length} / 500`; });
+askInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); runAsk(askInput.value); } });
+askBtn.addEventListener('click', () => runAsk(askInput.value));
+document.querySelectorAll('.ask-chip').forEach(chip => {
+  chip.addEventListener('click', () => { askInput.value = chip.dataset.q; askCounter.textContent = `${askInput.value.length} / 500`; runAsk(chip.dataset.q); });
+});
+
+async function runAsk(question) {
+  question = question.trim();
+  if (!question) return;
+  askBtn.disabled = true; askBtn.textContent = 'Thinking…';
+  showLoading('Running your question through the local AI…');
+  try {
+    const res = await fetch('/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question }) });
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.detail || `Error ${res.status}`); }
+    const data = await res.json();
+    resultArea.style.maxWidth = '720px';
+    resultArea.innerHTML = `
+      <div class="ask-result-card">
+        <div class="ask-q">"${data.question}"</div>
+        <div class="analysis-block"><div class="label">AI Answer</div><p>${data.answer}</p></div>
+      </div>`;
+  } catch (e) {
+    resultArea.innerHTML = `<div class="state-msg error">${e.message}</div>`;
+  } finally {
+    askBtn.disabled = false; askBtn.textContent = 'Ask AI';
+  }
+}
+
+// ── Hint chips ────────────────────────────────────────────────
+searchForm.addEventListener('submit', e => { e.preventDefault(); runSearch(tickerInput.value); });
+document.querySelectorAll('.hint-chip').forEach(chip => {
+  chip.addEventListener('click', () => { tickerInput.value = chip.dataset.ticker; runSearch(chip.dataset.ticker); });
+});
+
+// ── Watchlist ─────────────────────────────────────────────────
+const watchlistInput = document.getElementById('watchlistInput');
+const watchlistAddBtn = document.getElementById('watchlistAddBtn');
+
+watchlistInput.addEventListener('keydown', e => { if (e.key === 'Enter') addToWatchlist(); });
+watchlistAddBtn.addEventListener('click', addToWatchlist);
+
+async function addToWatchlist() {
+  const ticker = watchlistInput.value.trim().toUpperCase();
+  if (!ticker) return;
+  watchlistAddBtn.disabled = true;
+  watchlistAddBtn.textContent = 'Adding…';
+  try {
+    const res = await fetch('/watchlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ticker }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || `Error ${res.status}`);
+    watchlistInput.value = '';
+    loadWatchlist();
+  } catch (e) {
+    resultArea.innerHTML = `<div class="state-msg error">${e.message}</div>`;
+  } finally {
+    watchlistAddBtn.disabled = false;
+    watchlistAddBtn.textContent = '+ Add';
+  }
+}
+
+async function removeFromWatchlist(ticker) {
+  try {
+    await fetch(`/watchlist/${ticker}`, { method: 'DELETE' });
+    loadWatchlist();
+  } catch (e) {
+    resultArea.innerHTML = `<div class="state-msg error">Failed to remove ${ticker}</div>`;
+  }
+}
+
+async function loadWatchlist() {
+  resultArea.style.maxWidth = '720px';
+  resultArea.innerHTML = `<div class="state-msg"><div class="spinner"></div>Loading watchlist…</div>`;
+  try {
+    const res = await fetch('/watchlist');
+    const data = await res.json();
+    renderWatchlist(data.watchlist);
+  } catch {
+    resultArea.innerHTML = `<div class="state-msg error">Failed to load watchlist.</div>`;
+  }
+}
+
+function renderWatchlist(items) {
+  if (!items.length) {
+    resultArea.innerHTML = `
+      <div class="watchlist-card">
+        <div class="watchlist-header">
+          <span class="watchlist-title">My Watchlist</span>
+          <span class="watchlist-count">0 stocks</span>
+        </div>
+        <div class="watchlist-empty">
+          Your watchlist is empty.<br>Add a ticker using the input above.
+        </div>
+      </div>`;
+    return;
   }
 
-  loadTickerTape();
-  setInterval(loadTickerTape, 60000);
-</script>
+  const rows = items.map(item => {
+    const price = item.price != null ? `$${item.price.toFixed(2)}` : '—';
+    const dir = item.change_pct > 0 ? 'up' : item.change_pct < 0 ? 'down' : 'flat';
+    const arrow = item.change_pct > 0 ? '▲' : item.change_pct < 0 ? '▼' : '';
+    const chg = item.change_pct != null ? `${arrow} ${Math.abs(item.change_pct).toFixed(2)}%` : '—';
+    const date = item.added_at ? item.added_at.slice(0, 10) : '—';
+    return `
+      <tr>
+        <td>
+          <div class="wl-ticker">${item.ticker}</div>
+          <div class="wl-name">${item.company_name || ''}</div>
+        </td>
+        <td><div class="wl-price">${price}</div></td>
+        <td><div class="wl-chg ${dir}">${chg}</div></td>
+        <td><div class="wl-date">Added ${date}</div></td>
+        <td style="text-align:right">
+          <button class="wl-remove" onclick="removeFromWatchlist('${item.ticker}')">Remove</button>
+        </td>
+      </tr>`;
+  }).join('');
 
+  resultArea.innerHTML = `
+    <div class="watchlist-card">
+      <div class="watchlist-header">
+        <span class="watchlist-title">My Watchlist</span>
+        <span class="watchlist-count">${items.length} stock${items.length !== 1 ? 's' : ''}</span>
+      </div>
+      <table class="watchlist-table">
+        <thead>
+          <tr>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Added</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+// ── Init ──────────────────────────────────────────────────────
+loadTickerTape();
+setInterval(loadTickerTape, 60000);
+</script>
 </body>
 </html>
