@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -482,6 +482,180 @@
   }
   .wl-remove:hover { border-color: var(--loss); color: var(--loss); background: rgba(220,38,38,0.05); }
 
+  /* ---------- Portfolio ---------- */
+  .portfolio-box {
+    display: none; flex-direction: column; gap: 16px;
+    max-width: 680px; margin: 0 auto; width: 100%;
+  }
+  .portfolio-box.active { display: flex; }
+
+  .portfolio-inputs {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch;
+  }
+
+  .p-input-wrap {
+    flex: 1; min-width: 120px;
+    background: var(--card); border: 1.5px solid var(--line);
+    border-radius: 12px; padding: 6px 14px;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04);
+    transition: border-color 0.18s ease;
+  }
+  .p-input-wrap:focus-within { border-color: var(--accent); }
+  .p-input-wrap input {
+    width: 100%; border: none; outline: none; background: transparent;
+    font-family: 'JetBrains Mono', monospace; font-size: 14px;
+    font-weight: 500; color: var(--ink); padding: 6px 0;
+    text-transform: uppercase;
+  }
+  .p-input-wrap input[type="number"] { text-transform: none; }
+  .p-input-wrap input::placeholder {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    text-transform: none; color: #B4B0A8; font-size: 13px;
+  }
+
+  #portfolioAddBtn {
+    background: var(--ink); color: #fff; border: none; border-radius: 12px;
+    padding: 12px 20px; font-family: 'Inter', sans-serif; font-size: 14px;
+    font-weight: 600; cursor: pointer; white-space: nowrap;
+    transition: background 0.15s ease;
+  }
+  #portfolioAddBtn:hover { background: var(--accent-deep); }
+  #portfolioAddBtn:disabled { background: #C4C2BC; cursor: not-allowed; }
+
+  /* Portfolio result card */
+  .portfolio-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px 32px;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 24px 48px -24px rgba(15,17,21,0.12);
+    animation: rise 0.45s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  /* Summary bar */
+  .portfolio-summary {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--line); border: 1px solid var(--line);
+    border-radius: 12px; overflow: hidden; margin-bottom: 24px;
+  }
+  .ps-item { background: var(--card); padding: 16px 18px; }
+  .ps-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; }
+  .ps-value { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; color: var(--ink); }
+  .ps-value.up { color: var(--gain); }
+  .ps-value.down { color: var(--loss); }
+
+  /* Portfolio table */
+  .portfolio-table { width: 100%; border-collapse: collapse; }
+  .portfolio-table th {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); padding: 0 12px 10px 0;
+    text-align: left; border-bottom: 1px solid var(--line);
+  }
+  .portfolio-table th:last-child { text-align: right; padding-right: 0; }
+  .portfolio-table td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .portfolio-table tr:last-child td { border-bottom: none; }
+
+  .pt-ticker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: var(--accent-deep); }
+  .pt-name { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .pt-num { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .pt-pnl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; }
+  .pt-pnl.up { color: var(--gain); }
+  .pt-pnl.down { color: var(--loss); }
+  .pt-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .pt-remove {
+    background: none; border: 1px solid var(--line); border-radius: 6px;
+    padding: 5px 10px; font-size: 12px; color: var(--muted); cursor: pointer;
+    transition: all 0.12s ease; float: right;
+  }
+  .pt-remove:hover { border-color: var(--loss); color: var(--loss); background: rgba(220,38,38,0.05); }
+
+  .portfolio-empty { text-align: center; padding: 32px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  /* ---------- Alerts ---------- */
+  .alerts-box {
+    display: none; flex-direction: column; gap: 16px;
+    max-width: 680px; margin: 0 auto; width: 100%;
+  }
+  .alerts-box.active { display: flex; }
+
+  .alerts-inputs {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch;
+  }
+
+  .alert-select {
+    flex: 1; min-width: 160px;
+    background: var(--card); border: 1.5px solid var(--line);
+    border-radius: 12px; padding: 12px 14px;
+    font-family: 'Inter', sans-serif; font-size: 13px;
+    font-weight: 500; color: var(--ink); cursor: pointer;
+    outline: none; transition: border-color 0.18s ease;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236E6A64' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 32px;
+  }
+  .alert-select:focus { border-color: var(--accent); }
+
+  #alertAddBtn {
+    background: var(--ink); color: #fff; border: none; border-radius: 12px;
+    padding: 12px 20px; font-family: 'Inter', sans-serif; font-size: 14px;
+    font-weight: 600; cursor: pointer; white-space: nowrap;
+    transition: background 0.15s ease;
+  }
+  #alertAddBtn:hover { background: var(--accent-deep); }
+  #alertAddBtn:disabled { background: #C4C2BC; cursor: not-allowed; }
+
+  /* Alert cards */
+  .alerts-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px 32px;
+    box-shadow: 0 1px 2px rgba(15,17,21,0.04), 0 24px 48px -24px rgba(15,17,21,0.12);
+    animation: rise 0.45s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .alert-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .alert-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 18px; border: 1px solid var(--line);
+    border-radius: 12px; background: var(--bg);
+    transition: background 0.12s ease;
+  }
+  .alert-item.fired { background: rgba(22,163,74,0.04); border-color: rgba(22,163,74,0.25); }
+
+  .alert-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    font-weight: 700; padding: 5px 10px; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+  }
+  .alert-badge.above { background: rgba(22,163,74,0.1); color: #15803D; border: 1px solid rgba(22,163,74,0.25); }
+  .alert-badge.below { background: rgba(220,38,38,0.08); color: #B91C1C; border: 1px solid rgba(220,38,38,0.2); }
+  .alert-badge.fired-badge { background: rgba(22,163,74,0.15); color: #15803D; border: 1px solid rgba(22,163,74,0.3); }
+
+  .alert-info { flex: 1; }
+  .alert-ticker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: var(--accent-deep); }
+  .alert-company { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .alert-target { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--ink); margin-top: 4px; }
+  .alert-fired-at { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gain); margin-top: 2px; }
+
+  .alert-status {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    font-weight: 600; padding: 4px 10px; border-radius: 100px;
+  }
+  .alert-status.active { background: rgba(61,90,254,0.08); color: var(--accent-deep); }
+  .alert-status.fired { background: rgba(22,163,74,0.1); color: #15803D; }
+
+  .alert-remove {
+    background: none; border: 1px solid var(--line); border-radius: 6px;
+    padding: 5px 10px; font-size: 12px; color: var(--muted); cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .alert-remove:hover { border-color: var(--loss); color: var(--loss); background: rgba(220,38,38,0.05); }
+
+  .alerts-empty { text-align: center; padding: 32px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .alerts-check-btn {
+    background: transparent; border: 1.5px solid var(--line); border-radius: 10px;
+    padding: 10px 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s ease;
+  }
+  .alerts-check-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
   button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 </style>
 </head>
@@ -501,6 +675,8 @@
     <button class="mode-tab" data-mode="compare">Compare</button>
     <button class="mode-tab" data-mode="ask">Ask AI</button>
     <button class="mode-tab" data-mode="watchlist">Watchlist</button>
+    <button class="mode-tab" data-mode="portfolio">Portfolio</button>
+    <button class="mode-tab" data-mode="alerts">Alerts</button>
   </div>
 
   <!-- Analyze -->
@@ -561,6 +737,41 @@
       </div>
     </div>
   </div>
+
+  <!-- Portfolio -->
+  <div class="portfolio-box" id="portfolioSection">
+    <div class="portfolio-add-row">
+      <div class="portfolio-inputs">
+        <div class="p-input-wrap">
+          <input type="text" id="portfolioTicker" placeholder="Ticker e.g. AAPL" autocomplete="off" spellcheck="false" maxlength="10">
+        </div>
+        <div class="p-input-wrap">
+          <input type="number" id="portfolioQty" placeholder="Shares e.g. 10" min="0.01" step="0.01">
+        </div>
+        <div class="p-input-wrap">
+          <input type="number" id="portfolioBuyPrice" placeholder="Buy price e.g. 175.00" min="0.01" step="0.01">
+        </div>
+        <button type="button" id="portfolioAddBtn">+ Add Position</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerts -->
+  <div class="alerts-box" id="alertsSection">
+    <div class="alerts-inputs">
+      <div class="p-input-wrap">
+        <input type="text" id="alertTicker" placeholder="Ticker e.g. AAPL" autocomplete="off" spellcheck="false" maxlength="10">
+      </div>
+      <div class="p-input-wrap">
+        <input type="number" id="alertPrice" placeholder="Target price e.g. 300.00" min="0.01" step="0.01">
+      </div>
+      <select id="alertDirection" class="alert-select">
+        <option value="above">Price goes ABOVE ▲</option>
+        <option value="below">Price goes BELOW ▼</option>
+      </select>
+      <button type="button" id="alertAddBtn">+ Set Alert</button>
+    </div>
+  </div>
 </div>
 
 <div class="result-area" id="resultArea"></div>
@@ -606,9 +817,13 @@ document.querySelectorAll('.mode-tab').forEach(tab => {
     document.getElementById('compareSection').classList.toggle('active', currentMode === 'compare');
     document.getElementById('askSection').classList.toggle('active', currentMode === 'ask');
     document.getElementById('watchlistSection').classList.toggle('active', currentMode === 'watchlist');
+    document.getElementById('portfolioSection').classList.toggle('active', currentMode === 'portfolio');
+    document.getElementById('alertsSection').classList.toggle('active', currentMode === 'alerts');
     resultArea.innerHTML = '';
     resultArea.style.maxWidth = currentMode === 'compare' ? '1100px' : '720px';
     if (currentMode === 'watchlist') loadWatchlist();
+    if (currentMode === 'portfolio') loadPortfolio();
+    if (currentMode === 'alerts') loadAlerts();
   });
 });
 
@@ -1045,6 +1260,262 @@ function renderWatchlist(items) {
       </table>
     </div>`;
 }
+
+// ── Portfolio ─────────────────────────────────────────────────
+const portfolioAddBtn = document.getElementById('portfolioAddBtn');
+const portfolioTicker = document.getElementById('portfolioTicker');
+const portfolioQty = document.getElementById('portfolioQty');
+const portfolioBuyPrice = document.getElementById('portfolioBuyPrice');
+
+portfolioAddBtn.addEventListener('click', addPosition);
+
+async function addPosition() {
+  const ticker = portfolioTicker.value.trim().toUpperCase();
+  const quantity = parseFloat(portfolioQty.value);
+  const buyPrice = parseFloat(portfolioBuyPrice.value);
+
+  if (!ticker) { resultArea.innerHTML = `<div class="state-msg error">Please enter a ticker symbol.</div>`; return; }
+  if (!quantity || quantity <= 0) { resultArea.innerHTML = `<div class="state-msg error">Please enter a valid quantity.</div>`; return; }
+  if (!buyPrice || buyPrice <= 0) { resultArea.innerHTML = `<div class="state-msg error">Please enter a valid buy price.</div>`; return; }
+
+  portfolioAddBtn.disabled = true;
+  portfolioAddBtn.textContent = 'Adding…';
+
+  try {
+    const res = await fetch('/portfolio', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ticker, quantity, buy_price: buyPrice }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || `Error ${res.status}`);
+    portfolioTicker.value = '';
+    portfolioQty.value = '';
+    portfolioBuyPrice.value = '';
+    loadPortfolio();
+  } catch (e) {
+    resultArea.innerHTML = `<div class="state-msg error">${e.message}</div>`;
+  } finally {
+    portfolioAddBtn.disabled = false;
+    portfolioAddBtn.textContent = '+ Add Position';
+  }
+}
+
+async function removePosition(id) {
+  try {
+    await fetch(`/portfolio/${id}`, { method: 'DELETE' });
+    loadPortfolio();
+  } catch {
+    resultArea.innerHTML = `<div class="state-msg error">Failed to remove position.</div>`;
+  }
+}
+
+async function loadPortfolio() {
+  resultArea.style.maxWidth = '780px';
+  resultArea.innerHTML = `<div class="state-msg"><div class="spinner"></div>Loading portfolio…</div>`;
+  try {
+    const res = await fetch('/portfolio');
+    const data = await res.json();
+    renderPortfolio(data);
+  } catch {
+    resultArea.innerHTML = `<div class="state-msg error">Failed to load portfolio.</div>`;
+  }
+}
+
+function renderPortfolio(data) {
+  const s = data.summary;
+  const pnlDir = s.total_pnl >= 0 ? 'up' : 'down';
+  const pnlArrow = s.total_pnl >= 0 ? '▲' : '▼';
+
+  if (!data.positions.length) {
+    resultArea.innerHTML = `
+      <div class="portfolio-card">
+        <div class="portfolio-empty">
+          Your portfolio is empty.<br>Add a position using the inputs above.
+        </div>
+      </div>`;
+    return;
+  }
+
+  const summaryHtml = `
+    <div class="portfolio-summary">
+      <div class="ps-item"><div class="ps-label">Total Invested</div><div class="ps-value">$${s.total_invested.toLocaleString('en-US', {minimumFractionDigits:2})}</div></div>
+      <div class="ps-item"><div class="ps-label">Current Value</div><div class="ps-value">${s.total_value > 0 ? '$'+s.total_value.toLocaleString('en-US', {minimumFractionDigits:2}) : '—'}</div></div>
+      <div class="ps-item"><div class="ps-label">Total P&L</div><div class="ps-value ${s.total_value > 0 ? pnlDir : ''}">${s.total_value > 0 ? `${pnlArrow} $${Math.abs(s.total_pnl).toLocaleString('en-US', {minimumFractionDigits:2})}` : '—'}</div></div>
+      <div class="ps-item"><div class="ps-label">Return</div><div class="ps-value ${s.total_value > 0 ? pnlDir : ''}">${s.total_value > 0 ? `${pnlArrow} ${Math.abs(s.total_pnl_pct).toFixed(2)}%` : '—'}</div></div>
+    </div>`;
+
+  const rows = data.positions.map(p => {
+    const dir = p.pnl != null ? (p.pnl >= 0 ? 'up' : 'down') : '';
+    const arrow = p.pnl != null ? (p.pnl >= 0 ? '▲' : '▼') : '';
+    return `
+      <tr>
+        <td>
+          <div class="pt-ticker">${p.ticker}</div>
+          <div class="pt-name">${p.company_name || ''}</div>
+        </td>
+        <td>
+          <div class="pt-num">${p.quantity} shares</div>
+          <div class="pt-sub">@ $${p.buy_price.toFixed(2)}</div>
+        </td>
+        <td><div class="pt-num">$${p.invested.toLocaleString('en-US', {minimumFractionDigits:2})}</div></td>
+        <td>
+          <div class="pt-num">${p.current_price != null ? '$'+p.current_price.toFixed(2) : '—'}</div>
+          <div class="pt-sub">${p.current_value != null ? '$'+p.current_value.toLocaleString('en-US', {minimumFractionDigits:2}) : 'Market closed'}</div>
+        </td>
+        <td>
+          <div class="pt-pnl ${dir}">${p.pnl != null ? `${arrow} $${Math.abs(p.pnl).toFixed(2)}` : '—'}</div>
+          <div class="pt-sub">${p.pnl_pct != null ? `${arrow} ${Math.abs(p.pnl_pct).toFixed(2)}%` : ''}</div>
+        </td>
+        <td style="text-align:right">
+          <button class="pt-remove" onclick="removePosition(${p.id})">Remove</button>
+        </td>
+      </tr>`;
+  }).join('');
+
+  resultArea.innerHTML = `
+    <div class="portfolio-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <span style="font-family:'Fraunces',serif;font-size:22px;font-weight:500;">My Portfolio</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)">${data.positions.length} position${data.positions.length !== 1 ? 's' : ''}</span>
+      </div>
+      ${summaryHtml}
+      <table class="portfolio-table">
+        <thead>
+          <tr>
+            <th>Stock</th>
+            <th>Position</th>
+            <th>Invested</th>
+            <th>Current</th>
+            <th>P&L</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+// ── Alerts ────────────────────────────────────────────────────
+const alertAddBtn = document.getElementById('alertAddBtn');
+const alertTicker = document.getElementById('alertTicker');
+const alertPrice = document.getElementById('alertPrice');
+const alertDirection = document.getElementById('alertDirection');
+
+alertAddBtn.addEventListener('click', addAlert);
+
+async function addAlert() {
+  const ticker = alertTicker.value.trim().toUpperCase();
+  const targetPrice = parseFloat(alertPrice.value);
+  const direction = alertDirection.value;
+
+  if (!ticker) { resultArea.innerHTML = `<div class="state-msg error">Please enter a ticker symbol.</div>`; return; }
+  if (!targetPrice || targetPrice <= 0) { resultArea.innerHTML = `<div class="state-msg error">Please enter a valid target price.</div>`; return; }
+
+  alertAddBtn.disabled = true;
+  alertAddBtn.textContent = 'Setting…';
+
+  try {
+    const res = await fetch('/alerts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ticker, target_price: targetPrice, direction }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || `Error ${res.status}`);
+    alertTicker.value = '';
+    alertPrice.value = '';
+    loadAlerts();
+  } catch (e) {
+    resultArea.innerHTML = `<div class="state-msg error">${e.message}</div>`;
+  } finally {
+    alertAddBtn.disabled = false;
+    alertAddBtn.textContent = '+ Set Alert';
+  }
+}
+
+async function removeAlert(id) {
+  try {
+    await fetch(`/alerts/${id}`, { method: 'DELETE' });
+    loadAlerts();
+  } catch {
+    resultArea.innerHTML = `<div class="state-msg error">Failed to remove alert.</div>`;
+  }
+}
+
+async function checkAlerts() {
+  const btn = document.getElementById('checkAlertsBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Checking…'; }
+  try {
+    const res = await fetch('/alerts/check', { method: 'POST' });
+    const data = await res.json();
+    loadAlerts();
+    if (data.fired.length > 0) {
+      const names = data.fired.map(a => `${a.ticker} hit $${a.current_price}`).join(', ');
+      resultArea.innerHTML = `<div class="state-msg" style="color:var(--gain)">🔔 Alert fired: ${names}</div>`;
+      setTimeout(() => loadAlerts(), 2000);
+    }
+  } catch {
+    if (btn) { btn.disabled = false; btn.textContent = 'Check Now'; }
+  }
+}
+
+async function loadAlerts() {
+  resultArea.style.maxWidth = '720px';
+  resultArea.innerHTML = `<div class="state-msg"><div class="spinner"></div>Loading alerts…</div>`;
+  try {
+    const res = await fetch('/alerts');
+    const data = await res.json();
+    renderAlerts(data.alerts);
+  } catch {
+    resultArea.innerHTML = `<div class="state-msg error">Failed to load alerts.</div>`;
+  }
+}
+
+function renderAlerts(alerts) {
+  if (!alerts.length) {
+    resultArea.innerHTML = `
+      <div class="alerts-card">
+        <div class="alerts-empty">No alerts set.<br>Add one using the inputs above.</div>
+      </div>`;
+    return;
+  }
+
+  const active = alerts.filter(a => !a.fired).length;
+  const fired = alerts.filter(a => a.fired).length;
+
+  const items = alerts.map(a => {
+    const dirLabel = a.direction === 'above' ? '▲ ABOVE' : '▼ BELOW';
+    const firedAt = a.fired_at ? new Date(a.fired_at).toLocaleString() : null;
+    return `
+      <div class="alert-item ${a.fired ? 'fired' : ''}">
+        <div class="alert-badge ${a.fired ? 'fired-badge' : a.direction}">${a.fired ? '🔔 FIRED' : dirLabel}</div>
+        <div class="alert-info">
+          <div class="alert-ticker">${a.ticker}</div>
+          <div class="alert-company">${a.company_name || ''}</div>
+          <div class="alert-target">Target: $${a.target_price.toFixed(2)}</div>
+          ${firedAt ? `<div class="alert-fired-at">Fired at ${firedAt}</div>` : ''}
+        </div>
+        <div class="alert-status ${a.fired ? 'fired' : 'active'}">${a.fired ? 'Fired' : 'Active'}</div>
+        <button class="alert-remove" onclick="removeAlert(${a.id})">Remove</button>
+      </div>`;
+  }).join('');
+
+  resultArea.innerHTML = `
+    <div class="alerts-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <span style="font-family:'Fraunces',serif;font-size:22px;font-weight:500;">Price Alerts</span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)">${active} active · ${fired} fired</span>
+          <button class="alerts-check-btn" id="checkAlertsBtn" onclick="checkAlerts()">Check Now</button>
+        </div>
+      </div>
+      <div class="alert-list">${items}</div>
+    </div>`;
+}
+
+// Auto-check alerts every 60 seconds when on alerts tab
+setInterval(() => { if (currentMode === 'alerts') checkAlerts(); }, 60000);
 
 // ── Init ──────────────────────────────────────────────────────
 loadTickerTape();

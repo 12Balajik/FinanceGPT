@@ -11,11 +11,13 @@ from app.routes.history_routes import router as history_router
 from app.routes.qa_routes import router as qa_router
 from app.routes.news_routes import router as news_router
 from app.routes.watchlist_routes import router as watchlist_router
+from app.routes.portfolio_routes import router as portfolio_router
+from app.routes.alert_routes import router as alert_router
 
 app = FastAPI(
     title="FinanceGPT",
     description="AI-powered financial assistant using local LLM and Yahoo Finance.",
-    version="1.0.0",
+    version="1.2.0",
 )
 
 @app.on_event("startup")
@@ -29,6 +31,8 @@ app.include_router(history_router)
 app.include_router(qa_router)
 app.include_router(news_router)
 app.include_router(watchlist_router)
+app.include_router(portfolio_router)
+app.include_router(alert_router)
 
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
