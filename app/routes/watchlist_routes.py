@@ -1,11 +1,12 @@
-# app/routes/watchlist_routes.py
+ # app/routes/watchlist_routes.py
 
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Optional
 import yfinance as yf
-from app.database import get_db, WatchlistItem
+from app.database import get_db, WatchlistItem, User
+from app.services.auth_service import get_current_user
 
 router = APIRouter()
 
@@ -16,9 +17,14 @@ class AddTickerRequest(BaseModel):
 
 
 @router.get("/watchlist")
-def get_watchlist(db: Session = Depends(get_db)):
-    """Return all watchlist items with live prices."""
-    items = db.query(WatchlistItem).order_by(WatchlistItem.added_at).all()
+def get_watchlist(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    items = db.query(WatchlistItem).filter(
+        WatchlistItem.user_id == current_user.id
+    ).order_by(WatchlistItem.added_at).all()
+
     if not items:
         return {"watchlist": []}
 
@@ -27,19 +33,12 @@ def get_watchlist(db: Session = Depends(get_db)):
 
     try:
         data = yf.download(
-            tickers=tickers,
-            period="2d",
-            interval="1d",
-            group_by="ticker",
-            progress=False,
-            threads=True,
+            tickers=tickers, period="2d", interval="1d",
+            group_by="ticker", progress=False, threads=True,
         )
         for ticker in tickers:
             try:
-                if len(tickers) == 1:
-                    closes = data["Close"].dropna()
-                else:
-                    closes = data[ticker]["Close"].dropna()
+                closes = data["Close"].dropna() if len(tickers) == 1 else data[ticker]["Close"].dropna()
                 if len(closes) >= 2:
                     price = float(closes.iloc[-1])
                     prev = float(closes.iloc[-2])
@@ -49,68 +48,77 @@ def get_watchlist(db: Session = Depends(get_db)):
                     prev = price
                     change_pct = 0.0
                 else:
-                    raise ValueError("no data")
-                live_data[ticker] = {"price": round(price, 2), "change_pct": change_pct, "prev_close": round(prev, 2)}
+                    raise ValueError()
+                live_data[ticker] = {"price": round(price, 2), "change_pct": change_pct}
             except Exception:
-                live_data[ticker] = {"price": None, "change_pct": None, "prev_close": None}
+                live_data[ticker] = {"price": None, "change_pct": None}
     except Exception:
         for ticker in tickers:
-            live_data[ticker] = {"price": None, "change_pct": None, "prev_close": None}
+            live_data[ticker] = {"price": None, "change_pct": None}
 
-    result = []
-    for item in items:
-        ld = live_data.get(item.ticker, {})
-        result.append({
+    return {
+        "watchlist": [{
+            "id": item.id,
             "ticker": item.ticker,
             "company_name": item.company_name,
             "notes": item.notes,
             "added_at": item.added_at.isoformat() if item.added_at else None,
-            "price": ld.get("price"),
-            "change_pct": ld.get("change_pct"),
-            "prev_close": ld.get("prev_close"),
-        })
-
-    return {"watchlist": result}
+            "price": live_data.get(item.ticker, {}).get("price"),
+            "change_pct": live_data.get(item.ticker, {}).get("change_pct"),
+        } for item in items]
+    }
 
 
 @router.post("/watchlist")
-def add_to_watchlist(body: AddTickerRequest, db: Session = Depends(get_db)):
-    """Add a ticker to the watchlist."""
+def add_to_watchlist(
+    body: AddTickerRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
     ticker = body.ticker.strip().upper()
-    if not ticker:
-        raise HTTPException(status_code=400, detail="Ticker cannot be empty.")
 
-    existing = db.query(WatchlistItem).filter(WatchlistItem.ticker == ticker).first()
+    existing = db.query(WatchlistItem).filter(
+        WatchlistItem.user_id == current_user.id,
+        WatchlistItem.ticker == ticker
+    ).first()
     if existing:
         raise HTTPException(status_code=409, detail=f"{ticker} is already in your watchlist.")
 
-    # Verify ticker exists
+    company_name = ticker
     try:
         info = yf.Ticker(ticker).fast_info
-        price = info.get("lastPrice")
-        company = None
-        if price is None:
-            raise ValueError("invalid")
+        if info.get("lastPrice") is None:
+            raise ValueError()
         try:
-            company = yf.Ticker(ticker).info.get("longName") or ticker
+            company_name = yf.Ticker(ticker).info.get("longName") or ticker
         except Exception:
-            company = ticker
+            pass
     except Exception:
-        raise HTTPException(status_code=404, detail=f"Could not find ticker '{ticker}'. Check the symbol.")
+        raise HTTPException(status_code=404, detail=f"Could not find ticker '{ticker}'.")
 
-    item = WatchlistItem(ticker=ticker, company_name=company, notes=body.notes)
+    item = WatchlistItem(
+        user_id=current_user.id,
+        ticker=ticker,
+        company_name=company_name,
+        notes=body.notes
+    )
     db.add(item)
     db.commit()
-    return {"message": f"{ticker} added to watchlist.", "ticker": ticker, "company_name": company}
+    return {"message": f"{ticker} added to watchlist.", "ticker": ticker}
 
 
-@router.delete("/watchlist/{ticker}")
-def remove_from_watchlist(ticker: str, db: Session = Depends(get_db)):
-    """Remove a ticker from the watchlist."""
-    ticker = ticker.upper().strip()
-    item = db.query(WatchlistItem).filter(WatchlistItem.ticker == ticker).first()
+@router.delete("/watchlist/{item_id}")
+def remove_from_watchlist(
+    item_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    item = db.query(WatchlistItem).filter(
+        WatchlistItem.id == item_id,
+        WatchlistItem.user_id == current_user.id
+    ).first()
     if not item:
-        raise HTTPException(status_code=404, detail=f"{ticker} not found in watchlist.")
+        raise HTTPException(status_code=404, detail="Item not found.")
     db.delete(item)
     db.commit()
-    return {"message": f"{ticker} removed from watchlist."}
+    return {"message": f"{item.ticker} removed from watchlist."}
